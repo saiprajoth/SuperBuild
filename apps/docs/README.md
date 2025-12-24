@@ -1,28 +1,19 @@
+# Internal Documentation Example
+
+This is an example repo that can be copied into the `/docs` folder of your codebase. It follows [the Diátaxis method](https://diataxis.fr/) of technical documentation management. Here are some useful sections to keep in the README of your project.
+
+## Introduction
+
+An introduction to the area of the organization that this project lives in and the context around why this project was designed.
+
 ## Getting Started
 
-First, run the development server:
+How to get this repo up and running.
 
-```bash
-yarn dev
-```
+### I'm a developer working on this project, where do I start?
 
-Open [http://localhost:3001](http://localhost:3001) with your browser to see the result.
+Instructions for a developer that may be making changes to this repository.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### I'm a consumer of this project, where do I start?
 
-To create [API routes](https://nextjs.org/docs/app/building-your-application/routing/router-handlers) add an `api/` directory to the `app/` directory with a `route.ts` file. For individual endpoints, create a subfolder in the `api` directory, like `api/hello/route.ts` would map to [http://localhost:3001/api/hello](http://localhost:3001/api/hello).
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn/foundations/about-nextjs) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_source=github.com&utm_medium=referral&utm_campaign=turborepo-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Instructions for someone that may be using the production version of this project.
