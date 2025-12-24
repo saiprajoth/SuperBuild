@@ -1,35 +1,55 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useEffect, useState } from "react";
+import { ComponentBar } from "./components/ComponentBar";
+import { Canvas } from "./components/Canvas";
+import { useHistory } from "./hooks/useHistory";
 
-function App() {
-  const [count, setCount] = useState(0)
+export type CanvasElementData = {
+  id: string;
+  type: string;
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+};
+
+export default function App() {
+  // 🔥 SINGLE source of truth for canvas state
+  const history = useHistory<CanvasElementData[]>([]);
+  const elements = history.present;
+  const setElements = history.set;
+
+  const [selectedIds, setSelectedIds] = useState<string[]>([]);
+
+  // ⌨️ Undo / Redo
+  useEffect(() => {
+    function onKey(e: KeyboardEvent) {
+      if ((e.metaKey || e.ctrlKey) && e.key === "z" && !e.shiftKey) {
+        e.preventDefault();
+        history.undo();
+      }
+
+      if (
+        (e.metaKey && e.shiftKey && e.key === "z") ||
+        (e.ctrlKey && e.key === "y")
+      ) {
+        e.preventDefault();
+        history.redo();
+      }
+    }
+
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="flex h-screen w-screen overflow-hidden">
+      <ComponentBar />
+      <Canvas
+        elements={elements}
+        setElements={setElements}
+        selectedIds={selectedIds}
+        setSelectedIds={setSelectedIds}
+      />
+    </div>
+  );
 }
-
-export default App
